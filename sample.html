@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <button id="btnadd">Submit</button>
+    <script>
+        $("button").click(function () {
+            $.ajax({
+                type: 'POST',
+                url: "https://todo4kgfsl.herokuapp.com/todolist",
+                data: JSON.stringify({
+
+                    "id": 0,
+                    "isCompleted": true,
+                    "name": "name1",
+                    "priority": "priority1",
+                    "status": "status1"
+
+                }),
+                error: function (e) {
+                    console.log(e);
+                },
+                dataType: "json",
+                contentType: "application/json"
+            });
+        });
+    </script>
+</body>
+
+</html>
