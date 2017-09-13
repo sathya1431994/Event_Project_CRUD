@@ -4,8 +4,8 @@ function edit_row(no) {
     // var table_len = (table.rows.length)-1;
     // var row = table.insertRow(table_len).outerHTML = "<tr id ='row'"+table_len+"><td id='time_row'"+table_len+">"+agendatime+"</td><td id='desc_row'"+table_len+">"+agendadesc+"</td><td id = 'ins_row'"+table_len+">"+agendainstruction+"</td><td><button id='btnedit'"+table_len+"class='edit' onclick ='edit_row("+table_len+")'></button></td><td><button id='btnsave'"+table_len+" class='save' onclick='save_row("+table_len+")'></button></td><td><button id='btndel'"+table_len+" class='delete' onclick='delete_row("+table_len+")'></button></td></tr>"
 
-    //document.getElementById("btnedit" + no).style.display = "none";
-    //document.getElementById("btnsave" + no).style.display = "block";
+    document.getElementById("btnedit" + no).style.display = "none";
+    document.getElementById("btnsave" + no).style.display = "block";
 
     var time = document.getElementById("time_row" + no).innerText;
     var desc = document.getElementById("desc_row" + no).innerText;
@@ -51,8 +51,8 @@ function save_row(no) {
     // document.getElementById("desc_row" + no).innerHTML = desc_val;
     // document.getElementById("ins_row" + no).innerHTML = ins_val;
 
-    // document.getElementById("btnedit" + no).style.display = "block";
-    // document.getElementById("btnsave" + no).style.display = "none";
+    document.getElementById("btnedit" + no).style.display = "block";
+    document.getElementById("btnsave" + no).style.display = "none";
 }
 
 function delete_row(no) {
@@ -88,7 +88,6 @@ function indexDelete(no) {
     localStorage.setItem("data", JSON.stringify(remove));
     window.location.href = "http://127.0.0.1:5500/index.html";
 
-
 }
 
 function indexEdit(no) {
@@ -114,7 +113,7 @@ function validatekey() {
     for (var i = 0; i < agendas.length; i++) {
         var splitagenda = agendas[i];
         console.log(i);
-        agendadatas.innerHTML += "<tr id =row" + i + "><td id=time_row" + i + ">" + splitagenda.AGENDATIME + "</td><td id=desc_row" + i + ">" + splitagenda.AGENDADESC + "</td><td id = ins_row" + i + ">" + splitagenda.AGENDAINSTRUCTION + "</td><td><input type='button' id=btnedit" + i + " value='Edit' class='edit btn btn-primary' onClick ='edit_row(" + i + ")'></td><td><input type='button' id=btnsave" + i + " value='Save' class='save btn btn-primary' onClick='save_row(" + i + ")'></td><td><input type='button' id=btndel" + i + " value='Delete' class='delete btn btn-primary' onClick='delete_row(" + i + ")'></td></tr>";
+        agendadatas.innerHTML += "<tr id =row" + i + "><td id=time_row" + i + ">" + splitagenda.AGENDATIME + "</td><td id=desc_row" + i + ">" + splitagenda.AGENDADESC + "</td><td id = ins_row" + i + ">" + splitagenda.AGENDAINSTRUCTION + "</td><td><input type='button' id=btnedit" + i + " value='Edit' class='edit btn btn-primary' onClick ='edit_row(" + i + ")'><input type='button' id=btnsave" + i + " value='Save' class='save btn btn-primary' style='display:none' onClick='save_row(" + i + ")'></td><td><input type='button' id=btndel" + i + " value='Delete' class='delete btn btn-primary' onClick='delete_row(" + i + ")'></td></tr>";
         // document.getElementById("agendatime").value = splitagenda.AGENDATIME;
         // document.getElementById("agendadesc").value = splitagenda.AGENDADESC;
         // document.getElementById("agendainstruction").value = splitagenda.AGENDAINSTRUCTION;
