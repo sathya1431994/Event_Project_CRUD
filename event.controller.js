@@ -1,57 +1,54 @@
-
-
-
-function getItem() {
-
-    // document.getElementById("eventname").innerHTML = localStorage.EVENTNAME;
-    // document.getElementById("eventdate").innerHTML = localStorage.EVENTDATE;
-    // document.getElementById("eventstatus").innerHTML = localStorage.EVENTSTATUS;
-    // document.getElementById("eventlocation").innerHTML = localStorage.LOCATION;
-
-    var fields = localStorage.getItem("data");
-    var json = [];
-    json.push(JSON.parse(fields));
-    console.log(json.length);
-    for (var i = 0; i < json.length; i++) {
-        var splitdata = json[i];
-        $("#index tbody").append("<tr><td>" + splitdata.EVENTNAME + "</td><td>" + splitdata.EVENTDATE + "</td><td>" + splitdata.EVENTSTATUS + "</td><td>" + splitdata.LOCATION + "</td></tr>");
-    }
-
-    // console.log(JSON.stringify(fields));
-    //  for (var i in json) {
-    //    var splitdata = json[i];
-    //    console.log(splitdata.EVENTNAME);
-    //    $("#index tbody").append("<tr><td>" + splitdata.EVENTNAME + "</td><td>" + splitdata.EVENTDATE + "</td><td>" + splitdata.EVENTSTATUS + "</td><td>" + splitdata.LOCATION + "</td></tr>");
-    //  }
-
-};
-
-
 $(document).ready(function () {
 
     var converted_datas = [];
-    var newevent = [];
 
     $('#btndone').click(function (event) {
         event.preventDefault();
-        var eventname = $("#eventname").val();
-        var eventdate = $("#eventdate").val();
-        var eventstatus = $("#eventstatus").val();
-        var eventlocation = $("#eventlocation").val();
 
-        var eventdatas = {
-            "EVENTNAME": eventname,
-            "EVENTDATE": eventdate,
-            "EVENTSTATUS": eventstatus,
-            "LOCATION": eventlocation,
-            "AGENDA": converted_datas
-        };
+        if (localStorage.getItem("editkey") !== null && localStorage.getItem("editkey") !== 'undefined') {
 
-        var eform = document.getElementById("eventform");
-        eform.reset();
-        console.log(JSON.stringify(eventdatas));
+            var received = localStorage.getItem("editkey");
+            var exist = JSON.parse(localStorage.getItem("data"));
 
-            localStorage.setItem("data", JSON.stringify(eventdatas));
+                exist[received] = {
+                    "EVENTNAME": $("#eventname").val(),
+                    "EVENTDATE": $("#eventdate").val(),
+                    "EVENTSTATUS": $("#eventstatus").val(),
+                    "LOCATION": $("#eventlocation").val(),
+                    "AGENDA" : converted_datas
+                };
+            localStorage.setItem("data", JSON.stringify(exist));
+            delete window.localStorage["editkey"];
+
+        } else {
+
+            var eventname = $("#eventname").val();
+            var eventdate = $("#eventdate").val();
+            var eventstatus = $("#eventstatus").val();
+            var eventlocation = $("#eventlocation").val();
+
+            var eventdatas = {
+                "EVENTNAME": eventname,
+                "EVENTDATE": eventdate,
+                "EVENTSTATUS": eventstatus,
+                "LOCATION": eventlocation,
+                "AGENDA": converted_datas
+            };
+
+            var eform = document.getElementById("eventform");
+            console.log(JSON.stringify(eventdatas));
+
+            if (localStorage.getItem("data") !== null) {
+                var oldevent = JSON.parse(localStorage.getItem("data"));
+                oldevent.push((eventdatas));
+                localStorage.setItem("data", JSON.stringify(oldevent));
+            } else {
+                var newevent = [];
+                newevent.push(eventdatas);
+                localStorage.setItem("data", JSON.stringify(newevent));
+            }
+
+        }
 
         window.location.href = "http://127.0.0.1:5500/index.html";
 
@@ -87,13 +84,6 @@ $(document).ready(function () {
         var myobj = {};
         myobj.converted_datas = converted_datas;
         console.log(JSON.stringify(converted_datas));
-
-
     });
 
-
 });
-
-
-
-

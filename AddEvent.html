@@ -20,14 +20,14 @@
     </style>
 </head>
 
-<body>
+<body onload="validatekey()">
     <div class="container">
-        <div>
-            <h3 style="font-size: 18px;">Add new Event</h3>
-             <button id="btndone" class="btn btn-danger"><a href="index.html">Save</a></button>
-        </div>
-        </br>
         <form id="eventform">
+            <div>
+                <h3 style="font-size: 18px;">Add new Event</h3>
+                <button id="btndone" class="btn btn-default pull-right"><i class="fa fa-file-text" aria-hidden="true"></i> Save</button>
+            </div>
+            </br>
             <div class="form-group">
                 <label for="eventname">EVENT NAME :</label>
                 <input class="form-control" id="eventname" type="text" required>
@@ -70,9 +70,9 @@
                                 <table class="table" id="agendadatas">
                                     <thead>
                                         <tr>
-                                            <th>AGENDA TIME</th>
-                                            <th>AGENDA DESC</th>
-                                            <th>AGENDA INSTRUCTION</th>
+                                            <th>AGENDATIME</th>
+                                            <th>AGENDADESC</th>
+                                            <th>AGENDAINSTRUCTION</th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -83,7 +83,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="panel-footer"><button id="btnadd" class="btn btn-primary">Add Agenda!</button></div>
+                        <div class="panel-footer"><button id="btnadd" class="btn btn-default"><i class="fa fa-plus-square" aria-hidden="true"></i> Add Agenda!</button></div>
                     </div>
                 </div>
             </div>
